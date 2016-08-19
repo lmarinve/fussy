@@ -1,0 +1,13 @@
+com/jd/test/common/client/template/AbstractRestClient.class
+com/jd/test/common/web/util/HTTPLinkHeaderUtil.class
+com/jd/test/common/service/AbstractRawServiceIntegrationTest.class
+com/jd/test/common/web/AbstractReadOnlyLogicLiveTest.class
+com/jd/test/common/service/AbstractServiceIntegrationTest.class
+com/jd/test/common/web/AbstractLogicLiveTest.class
+com/jd/test/common/client/security/ITestAuthenticator.class
+com/jd/test/common/client/security/TokenResponse.class
+com/jd/test/common/util/IDUtil.class
+com/jd/test/common/client/template/IRestClient.class
+com/jd/um/spring/CommonTestConfig.class
+com/jd/test/common/test/contract/IResourceWithAssociationsIntegrationTest.class
+com/jd/test/common/client/template/IRestClientAsResponse.class

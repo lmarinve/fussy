@@ -1,0 +1,10 @@
+com/jd/client/template/AbstractBaseClientRestTemplate.class
+com/jd/client/util/HeaderUtil.class
+com/jd/client/spring/CommonClientConfig.class
+com/jd/client/util/HeaderUtil$1.class
+com/jd/client/template/IReadOnlyTemplateWithUri.class
+com/jd/client/template/IRestClientWithUri.class
+com/jd/client/util/UriUtil.class
+com/jd/client/marshall/IMarshaller.class
+com/jd/client/util/HeaderUtil$2.class
+com/jd/client/IDtoOperations.class

@@ -1,0 +1,15 @@
+com/jd/um/client/marshall/JacksonMarshaller$3.class
+com/jd/um/client/marshall/TestMarshallerFactory.class
+com/jd/um/client/template/PrivilegeTestRestTemplate.class
+com/jd/um/client/template/RoleTestRestTemplate.class
+com/jd/um/client/marshall/JacksonMarshaller$2.class
+com/jd/um/client/FixtureResourceFactory.class
+com/jd/um/client/marshall/JacksonMarshaller$1.class
+com/jd/um/model/UserDtoOpsImpl.class
+com/jd/um/client/security/OAuthAuthenticator.class
+com/jd/um/client/marshall/JacksonMarshaller$4.class
+com/jd/um/client/template/UserTestRestTemplate.class
+com/jd/um/client/marshall/JacksonMarshaller.class
+com/jd/um/model/PrincipalDtoOpsImpl.class
+com/jd/um/model/PrivilegeDtoOpsImpl.class
+com/jd/um/model/RoleDtoOpsImpl.class

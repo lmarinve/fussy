@@ -1,6 +1,8 @@
 package com.jd.um.run;
 
 import com.jd.um.persistence.setup.MyApplicationContextInitializer;
+import com.jd.um.spring.AuthorizationServerConfiguration;
+import com.jd.um.spring.ResourceServerConfiguration;
 import com.jd.um.spring.UmContextConfig;
 import com.jd.um.spring.UmPersistenceJpaConfig;
 import com.jd.um.spring.UmServiceConfig;
@@ -26,6 +28,8 @@ public class UmApp extends SpringBootServletInitializer {
 
             UmApp.class,
 
+            ResourceServerConfiguration.class,
+            AuthorizationServerConfiguration.class
     }; // // @formatter:on
 
     //

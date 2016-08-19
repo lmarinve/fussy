@@ -1,0 +1,11 @@
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/client/FixtureResourceFactory.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/model/RoleDtoOpsImpl.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/client/marshall/TestMarshallerFactory.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/client/template/PrivilegeTestRestTemplate.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/client/template/UserTestRestTemplate.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/model/UserDtoOpsImpl.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/client/marshall/JacksonMarshaller.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/client/template/RoleTestRestTemplate.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/model/PrincipalDtoOpsImpl.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/client/security/OAuthAuthenticator.java
+/Users/mac/workspace/fussy/um-client/src/test/java/com/jd/um/model/PrivilegeDtoOpsImpl.java
