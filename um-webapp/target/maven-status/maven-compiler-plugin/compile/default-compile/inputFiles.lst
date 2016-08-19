@@ -3,6 +3,7 @@
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/web/controller/RoleController.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/persistence/dao/IPrivilegeJpaDao.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/service/StartupLoggingComponent.java
+/Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/spring/AuthorizationServerConfiguration.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/spring/UmContextConfig.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/web/controller/UserController.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/persistence/setup/MyApplicationContextInitializer.java
@@ -25,6 +26,7 @@
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/service/IRoleService.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/common/security/MySavedRequestAwareAuthenticationSuccessHandler.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/web/controller/PrivilegeController.java
+/Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/spring/ResourceServerConfiguration.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/web/controller/AuthenticationController.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/web/controller/RedirectController.java
 /Users/mac/workspace/fussy/um-webapp/src/main/java/com/jd/um/service/impl/PrincipalServiceImpl.java

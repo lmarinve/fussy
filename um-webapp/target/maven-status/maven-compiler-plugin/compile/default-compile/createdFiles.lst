@@ -18,8 +18,10 @@ com/jd/um/service/impl/PrincipalServiceImpl.class
 com/jd/um/service/IPrivilegeService.class
 com/jd/um/run/UmApp.class
 com/jd/um/service/IPrincipalService.class
+com/jd/um/spring/ResourceServerConfiguration.class
 com/jd/um/service/IRoleService.class
 com/jd/um/security/UmUser.class
+com/jd/um/spring/AuthorizationServerConfiguration.class
 com/jd/um/spring/UmServletConfig.class
 com/jd/um/service/impl/RoleServiceImpl.class
 com/jd/um/service/StartupLoggingComponent.class
