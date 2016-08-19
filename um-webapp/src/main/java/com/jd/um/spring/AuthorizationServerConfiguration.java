@@ -1,4 +1,4 @@
-package org.baeldung.um.spring;
+package com.jd.um.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

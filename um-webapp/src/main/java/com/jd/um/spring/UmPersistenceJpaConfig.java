@@ -1,4 +1,4 @@
-package org.baeldung.um.spring;
+package com.jd.um.spring;
 
 import java.util.Properties;
 
@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "org.baeldung.um.persistence" })
-@PropertySource({ "classpath:persistence-${persistenceTarget:h2}.properties" })
+@ComponentScan({ "com.jd.um.persistence" })
+@PropertySource({ "classpath:persistence-${persistenceTarget:sql}.properties" })
 @EnableJpaRepositories(basePackages = "org.baeldung.um.persistence.dao")
 public class UmPersistenceJpaConfig {
 
@@ -38,7 +38,7 @@ public class UmPersistenceJpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "org.baeldung.um" });
+        em.setPackagesToScan(new String[] { "com.jd.um" });
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
