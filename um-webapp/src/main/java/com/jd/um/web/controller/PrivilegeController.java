@@ -6,13 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import com.jd.common.util.QueryConstants;
-import com.jd.common.web.controller.AbstractController;
-import com.jd.common.web.controller.ISortingController;
-import com.jd.um.persistence.model.Privilege;
-import com.jd.um.service.IPrivilegeService;
-import com.jd.um.util.Um.Privileges;
-import com.jd.um.util.UmMappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -25,6 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.jd.common.util.QueryConstants;
+import com.jd.common.web.controller.AbstractController;
+import com.jd.common.web.controller.ISortingController;
+import com.jd.um.persistence.model.Privilege;
+import com.jd.um.service.IPrivilegeService;
+import com.jd.um.util.Um.Privileges;
+import com.jd.um.util.UmMappings;
 
 @Controller
 @RequestMapping(value = UmMappings.PRIVILEGES)
@@ -113,7 +114,7 @@ public class PrivilegeController extends AbstractController<Privilege> implement
     // Spring
 
     @Override
-    protected final IPrivilegeService getService() {
+	protected IPrivilegeService getService() {
         return service;
     }
 
