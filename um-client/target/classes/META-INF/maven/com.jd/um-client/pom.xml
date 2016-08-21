@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.jd</groupId>
 		<artifactId>user-management-parent</artifactId>
-		<version>1.0</version>
+		<version>0.6.1</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -17,13 +17,13 @@
 		<dependency>
 			<groupId>com.jd</groupId>
 			<artifactId>common-client</artifactId>
-			<version>1.0</version>
+			<version>0.6.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.jd</groupId>
 			<artifactId>common-test</artifactId>
-			<version>1.0</version>
+			<version>0.6.1</version>
 			<scope>test</scope>
 		</dependency>
 
