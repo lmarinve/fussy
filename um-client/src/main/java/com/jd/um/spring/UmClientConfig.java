@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan({ "org.baeldung.um.client" })
+@ComponentScan({ "com.jd.um.client" })
 @Import({ CommonClientConfig.class, CommonWebConfig.class })
 public class UmClientConfig {
 

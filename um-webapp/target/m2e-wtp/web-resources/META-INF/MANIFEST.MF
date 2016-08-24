@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: um-webapp
-Implementation-Version: 0.6.1
-Built-By: mac
-Implementation-Vendor-Id: com.jd
-Build-Jdk: 1.8.0_60-ea
-Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
-

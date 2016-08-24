@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan({ "org.baeldung.common.client", "org.baeldung.client" })
+@ComponentScan({ "com.jd.common.client", "com.jd.client" })
 public class CommonClientConfig {
 
     public CommonClientConfig() {
