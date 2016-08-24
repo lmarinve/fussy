@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -18,6 +19,7 @@ import com.jd.common.interfaces.INameableDto;
 import com.jd.common.persistence.model.INameableEntity;
 
 @Entity
+@Table(name = "roles")
 @XmlRootElement
 public class Role implements INameableEntity, INameableDto {
 

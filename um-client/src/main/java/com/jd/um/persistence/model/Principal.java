@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -19,6 +20,7 @@ import com.jd.common.persistence.model.INameableEntity;
 import com.jd.um.web.dto.UserDto;
 
 @Entity
+@Table(name = "users")
 @XmlRootElement
 public class Principal implements INameableEntity, INameableDto {
 

@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.jd.common.interfaces.INameableDto;
 import com.jd.common.persistence.model.INameableEntity;
 
 @Entity
+@Table(name="privileges")
 @XmlRootElement
 public class Privilege implements INameableEntity, INameableDto {
 

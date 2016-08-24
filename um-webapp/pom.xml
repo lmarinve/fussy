@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.jd</groupId>
         <artifactId>user-management-parent</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
  
  	<dependencyManagement>
@@ -31,13 +31,13 @@
         <dependency>
             <groupId>com.jd</groupId>
             <artifactId>common</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.jd</groupId>
             <artifactId>common-client</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <scope>test</scope>
             <classifier>tests</classifier>
         </dependency>
@@ -45,20 +45,20 @@
         <dependency>
             <groupId>com.jd</groupId>
             <artifactId>common-test</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.jd</groupId>
             <artifactId>um-client</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.jd</groupId>
             <artifactId>um-client</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <scope>test</scope>
             <classifier>tests</classifier>
         </dependency>

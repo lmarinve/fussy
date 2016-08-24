@@ -3,7 +3,7 @@
 
 	<groupId>com.jd</groupId>
 	<artifactId>user-management-parent</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>user-management-parent</name>
