@@ -3,7 +3,7 @@
 
 	<groupId>com.jd</groupId>
 	<artifactId>user-management-parent</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>user-management-parent</name>
@@ -35,7 +35,6 @@
 		<connection>scm:git:https://github.com/lmarinve/fussy.git</connection>
 		<url>scm:git:https://github.com/lmarinve/fussy.git</url>
 		<developerConnection>scm:git:https://github.com/lmarinve/fussy.git</developerConnection>
-    <tag>HEAD</tag>
   </scm>
 
 	<build>

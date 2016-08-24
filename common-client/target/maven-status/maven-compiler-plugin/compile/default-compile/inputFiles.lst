@@ -1,8 +1,0 @@
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/spring/CommonClientConfig.java
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/template/AbstractBaseClientRestTemplate.java
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/marshall/IMarshaller.java
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/util/HeaderUtil.java
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/template/IReadOnlyTemplateWithUri.java
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/util/UriUtil.java
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/IDtoOperations.java
-/Users/mac/workspace/fussy/common-client/src/main/java/com/jd/client/template/IRestClientWithUri.java
