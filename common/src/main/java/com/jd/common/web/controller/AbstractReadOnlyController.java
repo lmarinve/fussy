@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.http.HttpHeaders;
 import com.jd.common.persistence.model.IEntity;
 import com.jd.common.persistence.service.IRawService;
-import com.jd.common.util.QueryConstants;
 import com.jd.common.web.RestPreconditions;
 import com.jd.common.web.WebConstants;
 import com.jd.common.web.events.MultipleResourcesRetrievedEvent;
@@ -54,7 +53,7 @@ public abstract class AbstractReadOnlyController<T extends IEntity> {
     }
 
     protected final T findOneInternal(final Long id) {
-        return RestPreconditions.checkFound(getService().findOne(id));
+        return RestPreconditions.checkNotNull(getService().findOne(id));
     }
 
     // find - all
@@ -70,7 +69,7 @@ public abstract class AbstractReadOnlyController<T extends IEntity> {
 
     protected final void findAllRedirectToPagination(final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         final String resourceName = clazz.getSimpleName().toString().toLowerCase();
-        final String locationValue = uriBuilder.path(WebConstants.PATH_SEP + resourceName).build().encode().toUriString() + QueryConstants.QUESTIONMARK + "page=0&size=10";
+        final String locationValue = uriBuilder.path(WebConstants.PATH_SEP + resourceName).build().encode().toUriString() + "?" + "page=0&size=10";
 
         response.setHeader(HttpHeaders.LOCATION, locationValue);
     }

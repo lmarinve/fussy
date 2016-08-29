@@ -2,11 +2,11 @@ package com.jd.common.web.listeners;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpHeaders;
 import com.jd.common.web.IUriMapper;
 import com.jd.common.web.events.AfterResourceCreatedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.common.base.Preconditions;
