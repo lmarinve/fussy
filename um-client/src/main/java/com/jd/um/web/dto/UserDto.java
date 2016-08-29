@@ -3,15 +3,14 @@ package com.jd.um.web.dto;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.jd.common.interfaces.INameableDto;
 import com.jd.common.persistence.model.INameableEntity;
 import com.jd.um.persistence.model.Principal;
 import com.jd.um.persistence.model.Role;
 import org.hibernate.validator.constraints.Email;
 
-@XmlRootElement
 public class UserDto implements INameableEntity, INameableDto {
 
     /**
@@ -21,7 +20,6 @@ public class UserDto implements INameableEntity, INameableDto {
 
 	private Long id;
 
-    @NotNull
     private String name;
 
     @NotNull
@@ -36,20 +34,18 @@ public class UserDto implements INameableEntity, INameableDto {
         super();
     }
 
-    public UserDto(final String name, final String email, final String password, final Set<Role> roles) {
+    public UserDto(final String nameToSet, final String passwordToSet, final Set<Role> rolesToSet) {
         super();
 
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
+        name = nameToSet;
+        password = passwordToSet;
+        roles = rolesToSet;
     }
 
     public UserDto(final Principal principal) {
         super();
 
         name = principal.getName();
-        email = principal.getEmail();
         roles = principal.getRoles();
         id = principal.getId();
     }
@@ -105,9 +101,7 @@ public class UserDto implements INameableEntity, INameableDto {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((roles == null) ? 0 : roles.hashCode());
         return result;
     }
 
@@ -120,22 +114,17 @@ public class UserDto implements INameableEntity, INameableDto {
         if (getClass() != obj.getClass())
             return false;
         final UserDto other = (UserDto) obj;
-        if (email == null) {
-            if (other.email != null)
-                return false;
-        } else if (!email.equals(other.email))
-            return false;
         if (name == null) {
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (roles == null) {
-            if (other.roles != null)
-                return false;
-        } else if (!roles.equals(other.roles))
-            return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("name", name).toString();
     }
 
 }

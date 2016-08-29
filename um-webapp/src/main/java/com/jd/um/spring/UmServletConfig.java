@@ -3,6 +3,7 @@ package com.jd.um.spring;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.jd.um.security.SimpleCorsFilter;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,7 @@ public class UmServletConfig {
 
     @Bean
     public ServletRegistrationBean dispatcherServletRegistration() {
-        final ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet(), "/*");
+        final ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet(), "/api/*");
 
         final Map<String, String> params = new HashMap<String, String>();
         params.put("contextClass", "org.springframework.web.context.support.AnnotationConfigWebApplicationContext");
@@ -34,6 +35,11 @@ public class UmServletConfig {
 
         registration.setLoadOnStartup(1);
         return registration;
+    }
+
+    @Bean
+    public SimpleCorsFilter simpleCorsFilter() {
+        return new SimpleCorsFilter();
     }
 
 }

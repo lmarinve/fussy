@@ -1,7 +1,6 @@
 package com.jd.um.service.impl;
 
 import com.jd.common.persistence.service.AbstractService;
-import com.jd.common.security.SpringSecurityUtil;
 import com.jd.um.persistence.dao.IPrincipalJpaDao;
 import com.jd.um.persistence.model.Principal;
 import com.jd.um.service.IPrincipalService;
@@ -29,15 +28,6 @@ public class PrincipalServiceImpl extends AbstractService<Principal> implements 
     @Transactional(readOnly = true)
     public Principal findByName(final String name) {
         return dao.findByName(name);
-    }
-
-    // other
-
-    @Override
-    @Transactional(readOnly = true)
-    public Principal getCurrentPrincipal() {
-        final String principalName = SpringSecurityUtil.getNameOfCurrentPrincipal();
-        return getDao().findByName(principalName);
     }
 
     // Spring

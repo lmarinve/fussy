@@ -2,10 +2,10 @@ package com.jd.um.service.main;
 
 import com.jd.common.persistence.model.INameableEntity;
 import com.jd.test.common.service.AbstractServiceIntegrationTest;
-import com.jd.um.spring.UmClientConfig;
 import com.jd.um.spring.UmContextConfig;
 import com.jd.um.spring.UmPersistenceJpaConfig;
 import com.jd.um.spring.UmServiceConfig;
+import com.jd.um.spring.UmClientConfig;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

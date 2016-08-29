@@ -1,4 +1,4 @@
-package com.jd.common.security;
+package com.jd.um.security;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class SimpleCorsFilter implements Filter {
+public final class SimpleCorsFilter implements Filter {
 
     public SimpleCorsFilter() {
         super();
@@ -28,19 +28,18 @@ public class SimpleCorsFilter implements Filter {
     @Override
     public final void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain) throws IOException, ServletException {
         final HttpServletResponse response = (HttpServletResponse) res;
-        final HttpServletRequest request = (HttpServletRequest) req;
         response.setHeader("Access-Control-Allow-Origin", "*");
+
         response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
-
         response.setHeader("Access-Control-Allow-Headers", "X-Requested-With, WWW-Authenticate, Authorization, Origin, Content-Type, Version");
         response.setHeader("Access-Control-Expose-Headers", "X-Requested-With, WWW-Authenticate, Authorization, Origin, Content-Type");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
 
-        if (!request.getMethod().equals("OPTIONS")) {
+        final HttpServletRequest request = (HttpServletRequest) req;
+        if (request.getMethod() != "OPTIONS") {
             chain.doFilter(req, res);
         } else {
-            response.setStatus(HttpServletResponse.SC_OK);
+            //
         }
     }
 
