@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.jd.um.persistence" })
-@PropertySource({ "classpath:persistence-${persistenceTarget:h2}.properties" })
+@PropertySource({ "classpath:persistence-${persistenceTarget:sql}.properties" })
 @EnableJpaRepositories(basePackages = "com.jd.um.persistence.dao")
 public class UmPersistenceJpaConfig {
 
@@ -71,7 +71,7 @@ public class UmPersistenceJpaConfig {
 
     final Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto", "create-drop"));
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 
         // setProperty("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
