@@ -16,7 +16,6 @@ public final class QueryConstants {
     /** - note: this character represents the ANY wildcard for the server side (persistence layer) */
     public static final String ANY_SERVER = "%";
     /** - note: this character represents the ANY wildcard for the client consumption of the API */
-    public static final String ANY_CLIENT = "*";
     public static final String SEPARATOR = ",";
     public static final String SEPARATOR_AMPER = "&";
     public static final String OP = "=";

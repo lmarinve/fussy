@@ -18,12 +18,10 @@ public final class CommonPaths implements InitializingBean {
 
     @Value("${http.protocol}")
     private String protocol;
-
     @Value("${http.host}")
     private String host;
-
     @Value("${http.port}")
-    private int port;
+    private String port;
 
     public CommonPaths() {
         super();
@@ -32,22 +30,10 @@ public final class CommonPaths implements InitializingBean {
     // API
 
     public final String getServerRoot() {
-        if (port == 80) {
+        if (port.equals("80")) {
             return protocol + "://" + host;
         }
         return protocol + "://" + host + ":" + port;
-    }
-
-    public final String getProtocol() {
-        return protocol;
-    }
-
-    public final String getHost() {
-        return host;
-    }
-
-    public final int getPort() {
-        return port;
     }
 
     //
@@ -60,7 +46,9 @@ public final class CommonPaths implements InitializingBean {
         if (host == null || host.equals("${http.host}")) {
             host = Preconditions.checkNotNull(env.getProperty("http.host"));
         }
-        port = Preconditions.checkNotNull(env.getProperty("http.port", Integer.class));
+        if (port == null || port.equals("${http.port}")) {
+            port = Preconditions.checkNotNull(env.getProperty("http.port"));
+        }
     }
 
 }

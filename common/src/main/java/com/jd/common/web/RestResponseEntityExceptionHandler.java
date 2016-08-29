@@ -3,7 +3,6 @@ package com.jd.common.web;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.ConstraintViolationException;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import com.jd.common.persistence.exception.MyEntityNotFoundException;
@@ -18,11 +17,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.InvalidMediaTypeException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.util.InvalidMimeTypeException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -64,7 +61,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, dto, headers, HttpStatus.BAD_REQUEST, request);
     }
 
-    @ExceptionHandler(value = { ConstraintViolationException.class, DataIntegrityViolationException.class })
+    @ExceptionHandler(value = { DataIntegrityViolationException.class })
     public final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
         log.info("Bad Request: {}", ex.getLocalizedMessage());
         log.debug("Bad Request: ", ex);
@@ -107,16 +104,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         final ApiError apiError = message(HttpStatus.CONFLICT, ex);
         return handleExceptionInternal(ex, apiError, new HttpHeaders(), HttpStatus.CONFLICT, request);
-    }
-
-    // 415
-
-    @ExceptionHandler({ InvalidMimeTypeException.class, InvalidMediaTypeException.class })
-    protected ResponseEntity<Object> handleInvalidMimeTypeException(final IllegalArgumentException ex, final WebRequest request) {
-        log.warn("Unsupported Media Type: {}", ex.getMessage());
-
-        final ApiError apiError = message(HttpStatus.UNSUPPORTED_MEDIA_TYPE, ex);
-        return handleExceptionInternal(ex, apiError, new HttpHeaders(), HttpStatus.UNSUPPORTED_MEDIA_TYPE, request);
     }
 
     // 500
