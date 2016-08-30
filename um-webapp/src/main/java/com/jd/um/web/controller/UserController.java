@@ -10,7 +10,7 @@ import com.jd.common.util.QueryConstants;
 import com.jd.common.web.controller.AbstractController;
 import com.jd.common.web.controller.ISortingController;
 import com.jd.um.service.IUserService;
-import com.jd.um.util.UmMappings;
+//import com.jd.um.util.UmMappings;
 import com.jd.um.web.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
-@RequestMapping(value = UmMappings.USERS)
+@RequestMapping()
+//@RequestMapping(value = UmMappings.USERS)
 public class UserController extends AbstractController<UserDto>implements ISortingController<UserDto> {
 
     @Autowired

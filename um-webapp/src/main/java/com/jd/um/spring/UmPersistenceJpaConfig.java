@@ -1,7 +1,5 @@
 package com.jd.um.spring;
 
-import java.util.Properties;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,9 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -41,7 +41,7 @@ public class UmPersistenceJpaConfig {
         em.setPackagesToScan(new String[] { "com.jd.um" });
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(additionalProperties());
+
         return em;
     }
 
@@ -68,15 +68,13 @@ public class UmPersistenceJpaConfig {
     }
 
     //
-
-    final Properties additionalProperties() {
-        final Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-
-        // setProperty("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
-        // setProperty("hibernate.ejb.naming_strategy", org.hibernate.cfg.ImprovedNamingStrategy.class.getName());
-        return hibernateProperties;
+    public JpaVendorAdapter vendorAdaper() {
+        final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setDatabase(env.getProperty("hibernate.dialect", Database.class));
+        vendorAdapter.setShowSql(env.getProperty("hibernate.show_sql", Boolean.class));
+        vendorAdapter.setGenerateDdl(env.getProperty("hibernate.hbm2ddl", Boolean.class));
+        return vendorAdapter;
     }
+    
 
 }

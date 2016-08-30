@@ -11,7 +11,7 @@ import com.jd.common.web.controller.AbstractController;
 import com.jd.common.web.controller.ISortingController;
 import com.jd.um.persistence.model.Privilege;
 import com.jd.um.service.IPrivilegeService;
-import com.jd.um.util.UmMappings;
+//import com.jd.um.util.UmMappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
-@RequestMapping(value = UmMappings.PRIVILEGES)
+//@RequestMapping(value = UmMappings.PRIVILEGES)
+@RequestMapping()
 public class PrivilegeController extends AbstractController<Privilege>implements ISortingController<Privilege> {
 
     @Autowired
