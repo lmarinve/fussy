@@ -1,5 +1,7 @@
 package com.jd.um.spring;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +14,15 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "com.jd.um.persistence" })
-@PropertySource({ "classpath:persistence-sql.properties" })
-@EnableJpaRepositories(basePackages = "com.jd.um.persistence.dao")
+@PropertySource({ "classpath:persistence.properties" })
+@ComponentScan({ "com.jd.persistence" })
+@EnableJpaRepositories(basePackages = "com.jd.persistence.dao")
 public class UmPersistenceJpaConfig {
 
     @Autowired
@@ -32,16 +32,16 @@ public class UmPersistenceJpaConfig {
         super();
     }
 
-    // beans
+    //
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "com.jd.um" });
+        em.setPackagesToScan(new String[] { "com.jd.persistence.model" });
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
-
+        em.setJpaProperties(additionalProperties());
         return em;
     }
 
@@ -50,8 +50,8 @@ public class UmPersistenceJpaConfig {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
-        dataSource.setUsername(env.getProperty("jdbc.username"));
-        dataSource.setPassword(env.getProperty("jdbc.password"));
+        dataSource.setUsername(env.getProperty("jdbc.user"));
+        dataSource.setPassword(env.getProperty("jdbc.pass"));
         return dataSource;
     }
 
@@ -67,14 +67,11 @@ public class UmPersistenceJpaConfig {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    //
-    public JpaVendorAdapter vendorAdaper() {
-        final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setDatabase(env.getProperty("hibernate.dialect", Database.class));
-        vendorAdapter.setShowSql(env.getProperty("hibernate.show_sql", Boolean.class));
-        vendorAdapter.setGenerateDdl(env.getProperty("hibernate.hbm2ddl", Boolean.class));
-        return vendorAdapter;
+    final Properties additionalProperties() {
+        final Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        return hibernateProperties;
     }
-    
 
 }
