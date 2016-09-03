@@ -1,6 +1,5 @@
 package com.jd.um.run;
 
-import java.util.Properties;
 import com.jd.um.spring.UmContextConfig;
 
 import com.jd.um.spring.UmPersistenceJpaConfig;
