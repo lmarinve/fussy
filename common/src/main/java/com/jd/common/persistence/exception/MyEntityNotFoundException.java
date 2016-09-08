@@ -2,12 +2,7 @@ package com.jd.common.persistence.exception;
 
 public final class MyEntityNotFoundException extends RuntimeException {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	public MyEntityNotFoundException() {
+    public MyEntityNotFoundException() {
         super();
     }
 

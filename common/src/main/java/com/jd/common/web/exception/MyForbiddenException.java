@@ -9,12 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.FORBIDDEN)
 public class MyForbiddenException extends RuntimeException {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	public MyForbiddenException() {
+    public MyForbiddenException() {
         super();
     }
 

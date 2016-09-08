@@ -13,12 +13,7 @@ public final class HeaderUtil {
 
     public static HttpHeaders createContentTypeHeaders(final IMarshaller marshaller) {
         final HttpHeaders headers = new HttpHeaders() {
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			{
+            {
                 set(com.google.common.net.HttpHeaders.CONTENT_TYPE, marshaller.getMime());
             }
         };
@@ -27,12 +22,7 @@ public final class HeaderUtil {
 
     public static HttpHeaders createAcceptHeaders(final IMarshaller marshaller) {
         final HttpHeaders headers = new HttpHeaders() {
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			{
+            {
                 set(com.google.common.net.HttpHeaders.ACCEPT, marshaller.getMime());
             }
         };

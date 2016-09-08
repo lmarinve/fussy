@@ -2,12 +2,7 @@ package com.jd.common.web.exception;
 
 public final class MyPreconditionFailedException extends RuntimeException {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	public MyPreconditionFailedException() {
+    public MyPreconditionFailedException() {
         super();
     }
 

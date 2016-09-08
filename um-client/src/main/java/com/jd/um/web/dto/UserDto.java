@@ -13,12 +13,7 @@ import org.hibernate.validator.constraints.Email;
 
 public class UserDto implements INameableEntity, INameableDto {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private Long id;
+    private Long id;
 
     private String name;
 

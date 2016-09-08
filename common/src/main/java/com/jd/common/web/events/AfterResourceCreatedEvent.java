@@ -18,11 +18,7 @@ import com.google.common.base.Preconditions;
  *            Type of the result that is being handled (commonly Entities).
  */
 public final class AfterResourceCreatedEvent<T extends Serializable> extends ApplicationEvent {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private final String idOfNewResource;
+    private final String idOfNewResource;
     private final HttpServletResponse response;
     private final UriComponentsBuilder uriBuilder;
 

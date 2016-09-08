@@ -14,12 +14,7 @@ import com.jd.common.persistence.model.INameableEntity;
 @XmlRootElement
 public class Privilege implements INameableEntity, INameableDto {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PRIV_ID")
     private Long id;

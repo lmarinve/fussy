@@ -16,11 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  *            Type of the result that is being handled (commonly Entities).
  */
 public final class SingleResourceRetrievedEvent<T extends Serializable> extends ApplicationEvent {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private final UriComponentsBuilder uriBuilder;
+    private final UriComponentsBuilder uriBuilder;
     private final HttpServletResponse response;
 
     public SingleResourceRetrievedEvent(final Class<T> clazz, final UriComponentsBuilder uriBuilderToSet, final HttpServletResponse responseToSet) {

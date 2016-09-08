@@ -21,12 +21,7 @@ import com.jd.common.persistence.model.INameableEntity;
 @XmlRootElement
 public class Role implements INameableEntity, INameableDto {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ROLE_ID")
     private Long id;
