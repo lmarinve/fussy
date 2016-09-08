@@ -130,6 +130,7 @@
 		<!-- marshalling -->
 		<jackson.version>2.6.5</jackson.version>
 		<jaxb-api.version>2.2.12</jaxb-api.version>
+		<xstream.version>1.4.8</xstream.version>
 
 		<!-- commons and utils -->
 		<commons-lang3.version>3.4</commons-lang3.version>

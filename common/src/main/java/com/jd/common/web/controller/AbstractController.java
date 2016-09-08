@@ -1,12 +1,8 @@
 package com.jd.common.web.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.jd.common.persistence.model.IEntity;
 import com.jd.common.web.RestPreconditions;
-import com.jd.common.web.events.AfterResourceCreatedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.util.UriComponentsBuilder;
 
 public abstract class AbstractController<T extends IEntity> extends AbstractReadOnlyController<T> {
 
@@ -17,13 +13,10 @@ public abstract class AbstractController<T extends IEntity> extends AbstractRead
 
     // save/create/persist
 
-    protected final void createInternal(final T resource, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+    protected final void createInternal(final T resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestState(resource.getId() == null);
-        final T existingResource = getService().create(resource);
-
-        // - note: mind the autoboxing and potential NPE when the resource has null id at this point (likely when working with DTOs)
-        eventPublisher.publishEvent(new AfterResourceCreatedEvent<T>(clazz, uriBuilder, response, existingResource.getId().toString()));
+        getService().create(resource);
     }
 
     // update
@@ -43,9 +36,6 @@ public abstract class AbstractController<T extends IEntity> extends AbstractRead
     // delete/remove
 
     protected final void deleteByIdInternal(final long id) {
-        // InvalidDataAccessApiUsageException - ResourceNotFoundException
-        // IllegalStateException - ResourceNotFoundException
-        // DataAccessException - ignored
         getService().delete(id);
     }
 

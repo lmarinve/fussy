@@ -10,7 +10,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider) {
         "Accept" : "application/json", 
     };
     
-    $http.get("http://localhost:8082/um-webapp/api/roles/1", {
+    $http.get("http://localhost:8080/um-webapp/api/roles/1", {
         headers : headers
     }).success(function(data) {
         $scope.role = data;

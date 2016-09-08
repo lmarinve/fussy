@@ -20,9 +20,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource({ "classpath:persistence.properties" })
-@ComponentScan({ "com.jd.persistence" })
-@EnableJpaRepositories(basePackages = "com.jd.persistence.dao")
+@ComponentScan({ "com.jd.um.persistence" })
+@PropertySource({ "classpath:persistence-${persistenceTarget:h2}.properties" })
+@EnableJpaRepositories(basePackages = "com.jd.um.persistence.dao")
 public class UmPersistenceJpaConfig {
 
     @Autowired
@@ -32,13 +32,13 @@ public class UmPersistenceJpaConfig {
         super();
     }
 
-    //
+    // beans
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "com.jd.persistence.model" });
+        em.setPackagesToScan(new String[] { "com.jd.um" });
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
@@ -50,8 +50,8 @@ public class UmPersistenceJpaConfig {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
-        dataSource.setUsername(env.getProperty("jdbc.user"));
-        dataSource.setPassword(env.getProperty("jdbc.pass"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
         return dataSource;
     }
 
@@ -67,10 +67,15 @@ public class UmPersistenceJpaConfig {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
+    //
+
     final Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
-        //hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto", "create-drop"));
         hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+
+        // setProperty("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
+        // setProperty("hibernate.ejb.naming_strategy", org.hibernate.cfg.ImprovedNamingStrategy.class.getName());
         return hibernateProperties;
     }
 
