@@ -5,8 +5,6 @@ import com.jd.um.spring.UmPersistenceJpaConfig;
 import com.jd.um.spring.UmServiceConfig;
 import com.jd.um.spring.UmServletConfig;
 import com.jd.um.spring.UmWebConfig;
-import com.jd.um.spring.UmJavaSecurityConfig;
-
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 public class UmApp {
 
 
-    private final static Object[] CONFIGS = { UmContextConfig.class, UmPersistenceJpaConfig.class, UmServiceConfig.class, UmWebConfig.class, UmServletConfig.class, UmJavaSecurityConfig.class };
+    private final static Object[] CONFIGS = { UmContextConfig.class, UmPersistenceJpaConfig.class, UmServiceConfig.class, UmWebConfig.class, UmServletConfig.class };
 
     //
 
