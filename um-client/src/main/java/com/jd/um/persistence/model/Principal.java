@@ -11,99 +11,168 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+//import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import com.jd.common.interfaces.INameableDto;
-import com.jd.common.persistence.model.INameableEntity;
+import com.jd.common.interfaces.IEmailableDto;
+import com.jd.common.persistence.model.IEmailableEntity;
 import com.jd.um.web.dto.UserDto;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@Table(name = "Principal")
 @XmlRootElement
-public class Principal implements INameableEntity, INameableDto {
+public class Principal implements IEmailableEntity, IEmailableDto {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PRINCIPAL_ID")
-    private Long id;
+    private Long PRINCIPAL_ID;
 
     @Column(unique = true, nullable = false)
-    private String name;
+    @Size(min = 1, max = 50)
+    @Pattern(regexp = "[A-Za-z ]*", message = "Solo puede contener letras y espacios") 
+    private String firstname;
 
-    @Column(unique = true, nullable = true)
+    @Column(unique = true, nullable = false)
+    @Size(min = 1, max = 50)
+    @Pattern(regexp = "[A-Za-z ]*", message = "Solo puede contener letras y espacios") 
+    private String lastname;
+
+    @Column(unique = true, nullable = false)
+    @NotEmpty
+    @Email
     private String email;
 
-    @Column(nullable = false)
+    @Column(length = 60, unique = true, nullable = false)
+    @NotEmpty
     private String password;
 
-    @Column( /* nullable = false */)
-    private Boolean locked;
+    @Column(nullable = false)
+    private boolean enabled;
 
+    @Column(nullable = false)
+    private boolean tokenExpired;
+ 
+    @Column(nullable = true)
+    private String cardCode;
+    
     // @formatter:off
     @ManyToMany( /* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)
     @JoinTable(joinColumns = { @JoinColumn(name = "PRINCIPAL_ID", referencedColumnName = "PRINCIPAL_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID") })
+    @XStreamImplicit
     private Set<Role> roles;
     // @formatter:on
+    
+    // @formatter:off
+    //@OneToMany( /* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)
+    //@JoinTable( name = "Principal_Jdcard", joinColumns = @JoinColumn(name = "PRINCIPAL_ID", referencedColumnName = "PRINCIPAL_ID") , inverseJoinColumns = @JoinColumn(name = "JDCARD_ID", referencedColumnName = "PAYMETHOD_ID") )
+    //private Set<Paymethod> paymethods;
+    // @formatter:on
 
+    // @formatter:off
+    //@OneToMany( /* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)
+    //@JoinTable( name = "Principal_Paymethod", joinColumns = @JoinColumn(name = "PRINCIPAL_ID", referencedColumnName = "PRINCIPAL_ID") , inverseJoinColumns = @JoinColumn(name = "PAYMETHOD_ID", referencedColumnName = "PAYMETHOD_ID") )
+    //private Set<Paymethod> paymethods;
+    // @formatter:on
+
+	
     public Principal() {
         super();
-
-        locked = false;
+        this.enabled = true;
+        this.tokenExpired = false;
     }
 
-    public Principal(final String nameToSet, final String passwordToSet, final Set<Role> rolesToSet) {
+    public Principal(final String firstnameToSet, final String lastnameToSet, final String emailToSet, final String passwordToSet, final Set<Role> rolesToSet, final Boolean enabledToSet, final boolean expiredToSet, final String cardcodeToSet)
+    {
         super();
 
-        name = nameToSet;
+        firstname = firstnameToSet;
+        lastname = lastnameToSet;
+        email = emailToSet;
+        password = passwordToSet;
+        roles = rolesToSet;
+        enabled = enabledToSet;
+        tokenExpired = expiredToSet;
+        cardCode = cardcodeToSet;
+        
+    }
+    
+
+    public Principal(final String emailToSet, final String passwordToSet, final Set<Role> rolesToSet) {
+        super();
+
+        email = emailToSet;
         password = passwordToSet;
         roles = rolesToSet;
     }
 
+
     public Principal(final UserDto userDto) {
         super();
 
-        name = userDto.getName();
+        firstname = userDto.getFirstname();
+        lastname = userDto.getLastname();
         email = userDto.getEmail();
         password = userDto.getPassword();
         roles = userDto.getRoles();
+        enabled =  userDto.isEnabled();
+        tokenExpired =  userDto.isTokenExpired();
+        cardCode =  userDto.getCardcode();
     }
 
-    // API
-
+    //API
     @Override
     public Long getId() {
-        return id;
+        return PRINCIPAL_ID;
     }
 
-    @Override
     public void setId(final Long idToSet) {
-        id = idToSet;
+        PRINCIPAL_ID = idToSet;
+    }
+    
+    public String getFirstname() {
+        return firstname;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public void setFirstname(final String firstnameToSet) {
+        firstname = firstnameToSet;
     }
 
-    public void setName(final String nameToSet) {
-        name = nameToSet;
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(final String lastnameToSet) {
+        lastname = lastnameToSet;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(final String email) {
-        this.email = email;
+    public void setEmail(final String emailToSet) {
+        email = emailToSet;
     }
 
     public String getPassword() {
-        return password;
-    }
+       return password;
+   }
 
-    public void setPassword(final String passwordToSet) {
-        password = passwordToSet;
-    }
+   public void setPassword(final String passwordToSet) {
+       password = passwordToSet;
+   }
 
     public Set<Role> getRoles() {
         return roles;
@@ -113,44 +182,70 @@ public class Principal implements INameableEntity, INameableDto {
         roles = rolesToSet;
     }
 
-    public Boolean getLocked() {
-        return locked;
+    public boolean isEnabled() {
+        return enabled;
+    }
+    
+    public void setEnabled(final boolean enabledToSet) {
+        enabled = enabledToSet;
+    }
+    
+    public boolean isTokenExpired() {
+        return tokenExpired;
     }
 
-    public void setLocked(final Boolean lockedToSet) {
-        locked = lockedToSet;
+    public void setTokenExpired(final boolean expiredToSet) {
+        tokenExpired = expiredToSet;
     }
 
-    //
+     public String getCardcode() {
+        return cardCode;
+    }
 
+    public void setcardCode(final String cardcodeToSet) {
+        cardCode = cardcodeToSet;
+    }
+
+    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        final Principal other = (Principal) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
+        }
+        final Principal users = (Principal) obj;
+        if (!email.equals(users.email)) {
             return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("name", name).toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append("users[id=").append(PRINCIPAL_ID).append("]")
+        .append("users[firstName=").append(firstname).append("]")
+        .append("users[lastName=").append(lastname).append("]")
+        .append("users[email=").append(email).append("]")
+        .append("users[password=").append(password).append("]")
+        .append("users[enabled=").append(enabled).append("]")
+        .append("users[tokenExpired=").append(tokenExpired).append("]")
+        .append("users[cardCode=").append(cardCode).append("]");
+
+        return builder.toString();
     }
 
 }

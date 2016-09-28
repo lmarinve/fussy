@@ -1,6 +1,6 @@
 package com.jd.um.service.impl;
 
-import com.jd.common.persistence.service.AbstractService;
+import com.jd.common.persistence.service.AbstractEService;
 import com.jd.common.security.SpringSecurityUtil;
 import com.jd.um.persistence.dao.IPrincipalJpaDao;
 import com.jd.um.persistence.model.Principal;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class PrincipalServiceImpl extends AbstractService<Principal> implements IPrincipalService {
+public class PrincipalServiceImpl extends AbstractEService<Principal> implements IPrincipalService {
 
     @Autowired
     private IPrincipalJpaDao dao;
@@ -27,8 +27,8 @@ public class PrincipalServiceImpl extends AbstractService<Principal> implements 
 
     @Override
     @Transactional(readOnly = true)
-    public Principal findByName(final String name) {
-        return dao.findByName(name);
+    public Principal findByEmail(final String email) {
+        return dao.findByEmail(email);
     }
 
     // other
@@ -36,8 +36,8 @@ public class PrincipalServiceImpl extends AbstractService<Principal> implements 
     @Override
     @Transactional(readOnly = true)
     public Principal getCurrentPrincipal() {
-        final String principalName = SpringSecurityUtil.getNameOfCurrentPrincipal();
-        return getDao().findByName(principalName);
+        final String principalEmail = SpringSecurityUtil.getNameOfCurrentPrincipal();
+        return getDao().findByEmail(principalEmail);
     }
 
     // Spring

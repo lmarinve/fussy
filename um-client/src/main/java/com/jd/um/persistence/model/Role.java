@@ -12,16 +12,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Table;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.jd.common.interfaces.INameableDto;
 import com.jd.common.persistence.model.INameableEntity;
 
 @Entity
+@Table(name = "Role")
 @XmlRootElement
-public class Role implements INameableEntity, INameableDto {
+public class Role implements INameableEntity, INameableDto  {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ROLE_ID")
     private Long id;
@@ -29,9 +35,12 @@ public class Role implements INameableEntity, INameableDto {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<Principal> users;
+
     // @formatter:off
-    @ManyToMany( /* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)
-    @JoinTable(joinColumns = { @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "PRIV_ID", referencedColumnName = "PRIV_ID") })
+    @ManyToMany (/* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)
+    @JoinTable(name = "Role_Privilege", joinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID") , inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id") )
     private Set<Privilege> privileges;
     // @formatter:on
 
@@ -44,7 +53,8 @@ public class Role implements INameableEntity, INameableDto {
         name = nameToSet;
     }
 
-    public Role(final String nameToSet, final Set<Privilege> privilegesToSet) {
+
+    public Role (final String nameToSet, final Set<Privilege> privilegesToSet) {
         super();
         name = nameToSet;
         privileges = privilegesToSet;
@@ -80,6 +90,15 @@ public class Role implements INameableEntity, INameableDto {
     }
 
     //
+    
+    public Set<Principal> getUsers() {
+        return users;
+    }
+
+    public void setUsers(final Set<Principal> usersToSet) {
+        users = usersToSet;
+    }
+
 
     @Override
     public int hashCode() {
@@ -89,26 +108,30 @@ public class Role implements INameableEntity, INameableDto {
         return result;
     }
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        final Role other = (Role) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Role))
+			return false;
+		Role other = (Role) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("name", name).toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Role [name=").append(name).append("]").append("[id=").append(id).append("]");
+        return builder.toString();
     }
-
 }

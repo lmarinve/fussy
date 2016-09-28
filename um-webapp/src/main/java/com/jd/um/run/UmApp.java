@@ -1,43 +1,76 @@
 package com.jd.um.run;
 
-import com.jd.um.persistence.setup.MyApplicationContextInitializer;
 import com.jd.um.spring.UmContextConfig;
-import com.jd.um.spring.UmJavaSecurityConfig;
 import com.jd.um.spring.UmPersistenceJpaConfig;
 import com.jd.um.spring.UmServiceConfig;
 import com.jd.um.spring.UmServletConfig;
 import com.jd.um.spring.UmWebConfig;
+import com.jd.um.spring.UmJavaSecurityConfig;
+
+import java.util.Properties;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+@Configuration
+@ComponentScan(basePackages = { "com.jd.registration" })
+@PropertySource("classpath:email.properties")
 @SpringBootApplication(exclude = { // @formatter:off
         SecurityAutoConfiguration.class
         , ErrorMvcAutoConfiguration.class
 }) // @formatter:on
-@Import({ // @formatter:off
-    UmContextConfig.class,
-
-    UmPersistenceJpaConfig.class,
-
-    UmServiceConfig.class,
-
-    UmWebConfig.class,
-    UmServletConfig.class,
-    UmJavaSecurityConfig.class
-}) // @formatter:on
 public class UmApp {
 
-    public UmApp() {
-        super();
-    }
+
+    private final static Object[] CONFIGS = { UmContextConfig.class, UmPersistenceJpaConfig.class, UmServiceConfig.class, UmWebConfig.class, UmServletConfig.class, UmJavaSecurityConfig.class };
 
     //
 
-    public static void main(final String... args) {
-        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer()).run(args);
+    protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
+        return application.sources(CONFIGS);
     }
 
+    public static void main(final String... args) {
+        SpringApplication.run(CONFIGS, args);
+    }
+
+	
+
+    @Autowired
+    private Environment env;
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public JavaMailSenderImpl javaMailSenderImpl() {
+        final JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
+        mailSenderImpl.setHost(env.getProperty("smtp.host"));
+        mailSenderImpl.setPort(env.getProperty("smtp.port", Integer.class));
+        mailSenderImpl.setProtocol(env.getProperty("smtp.protocol"));
+        mailSenderImpl.setUsername(env.getProperty("smtp.username"));
+        mailSenderImpl.setPassword(env.getProperty("smtp.password"));
+        final Properties javaMailProps = new Properties();
+        javaMailProps.put("mail.smtp.auth", true);
+        javaMailProps.put("mail.smtp.starttls.enable", true);
+        mailSenderImpl.setJavaMailProperties(javaMailProps);
+        return mailSenderImpl;
+    }
+
+    
 }
+
+

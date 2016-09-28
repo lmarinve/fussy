@@ -7,4 +7,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface IPrivilegeJpaDao extends JpaRepository<Privilege, Long>, JpaSpecificationExecutor<Privilege>, IByNameApi<Privilege> {
     //
+    Privilege findByName(String name);
+
+    @Override
+    void delete(Privilege privilege);
+
 }

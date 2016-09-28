@@ -42,12 +42,12 @@ public final class MyUserDetailsService implements UserDetailsService {
      * Loads the user from the datastore, by it's user name <br>
      */
     @Override
-    public final UserDetails loadUserByUsername(final String username) {
-        Preconditions.checkNotNull(username);
+    public final UserDetails loadUserByUsername(final String email) {
+        Preconditions.checkNotNull(email);
 
-        final Principal principal = principalService.findByName(username);
+        final Principal principal = principalService.findByEmail(email);
         if (principal == null) {
-            throw new UsernameNotFoundException("Username was not found: " + username);
+            throw new UsernameNotFoundException("Username was not found: " + email);
         }
 
         final Set<Role> rolesOfUser = principal.getRoles();
@@ -60,7 +60,7 @@ public final class MyUserDetailsService implements UserDetailsService {
         final String[] roleStringsAsArray = rolesToString.toArray(new String[rolesToString.size()]);
         final List<GrantedAuthority> auths = AuthorityUtils.createAuthorityList(roleStringsAsArray);
 
-        return new User(principal.getName(), principal.getPassword(), auths);
+        return new User(principal.getEmail(), principal.getPassword(), auths);
     }
 
 }

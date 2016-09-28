@@ -36,8 +36,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDto findByName(final String name) {
-        final Principal principal = principalService.findByName(name);
+    public UserDto findByEmail(final String email) {
+        final Principal principal = principalService.findByEmail(email);
         return new UserDto(principal);
     }
 
@@ -107,8 +107,7 @@ public class UserServiceImpl implements IUserService {
     public void update(final UserDto dto) {
         final Principal principalToUpdate = RestPreconditions.checkNotNull(principalService.findOne(dto.getId()));
 
-        principalToUpdate.setName(dto.getName());
-        principalToUpdate.setEmail(dto.getEmail());
+         principalToUpdate.setEmail(dto.getEmail());
         principalToUpdate.setRoles(dto.getRoles());
 
         principalService.update(principalToUpdate);

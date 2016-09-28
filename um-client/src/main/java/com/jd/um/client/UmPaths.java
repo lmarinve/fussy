@@ -30,7 +30,7 @@ public final class UmPaths {
     }
 
     public final String getRootUri() {
-        return getContext() + "/api/";
+        return getContext() + "/apifussy/";
     }
 
     public final String getUserUri() {

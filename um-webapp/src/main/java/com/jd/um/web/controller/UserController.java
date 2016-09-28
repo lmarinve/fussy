@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.jd.common.persistence.service.IRawService;
 import com.jd.common.util.QueryConstants;
 import com.jd.common.web.controller.AbstractController;
 import com.jd.common.web.controller.ISortingController;
-import com.jd.um.service.IUserService;
 import com.jd.um.util.Um.Privileges;
 import com.jd.um.util.UmMappings;
 import com.jd.um.web.dto.UserDto;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserController extends AbstractController<UserDto> implements ISortingController<UserDto> {
 
     @Autowired
-    private IUserService service;
+    private IRawService<UserDto> service;
 
     public UserController() {
         super(UserDto.class);
@@ -110,7 +110,7 @@ public class UserController extends AbstractController<UserDto> implements ISort
     // Spring
 
     @Override
-    protected final IUserService getService() {
+    protected final IRawService<UserDto> getService() {
         return service;
     }
 

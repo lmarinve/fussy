@@ -18,8 +18,8 @@ public final class UserDtoOpsImpl implements IDtoOperations<UserDto> {
 
     // API
 
-    public final UserDto createNewEntity(final String name) {
-        return new UserDto(name, randomAlphabetic(8), Sets.<Role> newHashSet());
+    public final UserDto createNewEntity(final String email) {
+        return new UserDto(email, randomAlphabetic(8), Sets.<Role> newHashSet());
     }
 
     // template method
@@ -31,12 +31,12 @@ public final class UserDtoOpsImpl implements IDtoOperations<UserDto> {
 
     @Override
     public final void invalidate(final UserDto entity) {
-        entity.setName(null);
+        entity.setEmail(null);
     }
 
     @Override
     public final void change(final UserDto resource) {
-        resource.setName(randomAlphabetic(8));
+        resource.setEmail(randomAlphabetic(8));
     }
 
 }

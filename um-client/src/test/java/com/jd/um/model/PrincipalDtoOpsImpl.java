@@ -25,12 +25,12 @@ public final class PrincipalDtoOpsImpl implements IDtoOperations<Principal> {
 
     @Override
     public final void invalidate(final Principal entity) {
-        entity.setName(null);
+        entity.setEmail(null);
     }
 
     @Override
     public final void change(final Principal resource) {
-        resource.setName(randomAlphabetic(8));
+        resource.setEmail(randomAlphabetic(8));
     }
 
 }

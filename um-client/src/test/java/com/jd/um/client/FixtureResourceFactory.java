@@ -18,21 +18,20 @@ public class FixtureResourceFactory {
     // user DTO
 
     public static UserDto createNewUser() {
-        return createNewUser(randomAlphabetic(8), randomAlphabetic(8));
+        return createNewUser(randomAlphabetic(8), randomAlphabetic(8), randomAlphabetic(8), randomAlphabetic(8), false, true, randomAlphabetic(8));
     }
 
-    public static UserDto createNewUser(final String name, final String pass) {
-        return new UserDto(name, pass, Sets.<Role> newHashSet());
+    public static UserDto createNewUser(final String firstname, final String lastname, final String email, final String pass, final Boolean enabled, final Boolean tokenExpired, final String cardCode) {
+        return new UserDto(firstname, lastname, email, pass, Sets.<Role> newHashSet(), enabled, tokenExpired, cardCode);
     }
-
     // principal
 
     public static Principal createNewPrincipal() {
         return createNewPrincipal(randomAlphabetic(8), randomAlphabetic(8));
     }
 
-    public static Principal createNewPrincipal(final String name, final String pass) {
-        return new Principal(name, pass, Sets.<Role> newHashSet());
+    public static Principal createNewPrincipal(final String email, final String pass) {
+        return new Principal(email, pass, Sets.<Role> newHashSet());
     }
 
     // role

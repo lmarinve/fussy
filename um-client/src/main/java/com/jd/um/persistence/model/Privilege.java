@@ -1,29 +1,39 @@
 package com.jd.um.persistence.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.jd.common.interfaces.INameableDto;
 import com.jd.common.persistence.model.INameableEntity;
 
 @Entity
+@Table(name="privileges")
 @XmlRootElement
-public class Privilege implements INameableEntity, INameableDto {
+public class Privilege  implements INameableEntity, INameableDto {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PRIV_ID")
+	@Column(name = "PRIV_ID")
     private Long id;
-
+	
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(unique = false, nullable = true)
-    private String description;
+    @ManyToMany(mappedBy = "privileges")
+    private Set<Role> roles;
 
     public Privilege() {
         super();
@@ -55,15 +65,13 @@ public class Privilege implements INameableEntity, INameableDto {
         name = nameToSet;
     }
 
-    public String getDescription() {
-        return description;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setDescription(final String descriptionToSet) {
-        description = descriptionToSet;
+    public void setRoles(final Set<Role> roleToSet) {
+        roles = roleToSet;
     }
-
-    //
 
     @Override
     public int hashCode() {
@@ -75,24 +83,26 @@ public class Privilege implements INameableEntity, INameableDto {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        final Privilege other = (Privilege) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
+        }
+        final Privilege privileges = (Privilege) obj;
+        if (!privileges.equals(privileges.name)) {
             return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return getName();
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Privilege [name=").append(name).append("]").append("[id=").append(id).append("]");
+        return builder.toString();
     }
-
 }

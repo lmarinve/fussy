@@ -27,9 +27,9 @@ public final class UmConvertionUtil {
         return privileges;
     }
 
-    public static Collection<String> convertPrivilegesToPrivilegeNames(final Collection<Privilege> privileges) {
+    public static Collection<String> convertPrivilegesToPrivilegeNames(final Collection<Privilege> privilege) {
         final Function<Object, String> toStringFunction = Functions.toStringFunction();
-        return Collections2.transform(privileges, toStringFunction);
+        return Collections2.transform(privilege, toStringFunction);
     }
 
     public static Collection<String> convertRolesToPrivilegeNames(final Iterable<Role> roles) {
